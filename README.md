@@ -4,8 +4,6 @@
 
 Helper to get and typecast environment variables.
 
-Unlike the C call an exception is thrown if the requested environment variable is not set.
-
 ## Installation
 
 ```
@@ -57,6 +55,34 @@ primes.forEach(function(prime) {
   // console.log(prime, typeof prime);
 });
 ```
+
+## Methods
+
+All methods accept a fallback value that will be returned if the requested environment variable is not set. If the fallback value is omitted and if the requested environment variable does not exist, an exception is thrown.
+
+### env(name, [fallback])
+
+Alias for `env.string(name, [fallback])`.
+
+### env.string(name, [fallback])
+
+Return as string.
+
+### env.int(name, [fallback])
+
+Return as integer number.
+
+### env.float(name, [fallback])
+
+Return as float number.
+
+### env.bool(name, [fallback])
+
+Return as boolean.
+
+### env.array(name, [type], [fallback])
+
+Split value of the environment variable at each comma and return the resulting array where each value has been typecast according to the `type` parameter. An array can be provided as `fallback`.
 
 ## Changelog
 

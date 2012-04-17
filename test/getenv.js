@@ -71,8 +71,20 @@ tests['getenv.string() valid input'] = function() {
 
 tests['getenv.string() nonexistent variable'] = function() {
   assert.throws(function() {
+    getenv('TEST_GETENV_NONEXISTENT');
+  });
+  assert.throws(function() {
     getenv.string('TEST_GETENV_NONEXISTENT');
   });
+};
+
+
+tests['getenv.string() nonexistent variable with fallback'] = function() {
+  var expect = 'fallback';
+  var stringVar = getenv.string('TEST_GETENV_NONEXISTENT', expect);
+  assert.strictEqual(stringVar, expect);
+  stringVar = getenv('TEST_GETENV_NONEXISTENT', expect);
+  assert.strictEqual(stringVar, expect);
 };
 
 
@@ -121,6 +133,13 @@ tests['getenv.int() nonexistent variable'] = function() {
 };
 
 
+tests['getenv.int() nonexistent variable with fallback'] = function() {
+  var expect = 10;
+  var intVar = getenv.int('TEST_GETENV_NONEXISTENT', expect);
+  assert.strictEqual(intVar, expect);
+};
+
+
 tests['getenv.float() valid input'] = function() {
   var data = [{
     varName: 'TEST_GETENV_FLOAT1',
@@ -160,6 +179,13 @@ tests['getenv.float() nonexistent variable'] = function() {
 };
 
 
+tests['getenv.float() nonexistent variable with fallback'] = function() {
+  var expect = 2.2;
+  var floatVar = getenv.float('TEST_GETENV_NONEXISTENT', expect);
+  assert.strictEqual(floatVar, expect);
+};
+
+
 tests['getenv.bool() valid input'] = function() {
   var data = [{
     varName: 'TEST_GETENV_FALSE',
@@ -196,6 +222,13 @@ tests['getenv.bool() nonexistent variable'] = function() {
   assert.throws(function() {
     getenv.bool('TEST_GETENV_NONEXISTENT');
   });
+};
+
+
+tests['getenv.bool() nonexistent variable with fallback'] = function() {
+  var expect = true;
+  var boolVar = getenv.bool('TEST_GETENV_NONEXISTENT', expect);
+  assert.strictEqual(boolVar, expect);
 };
 
 
@@ -321,11 +354,20 @@ tests['getenv.array() invalid bool input'] = function() {
   });
 };
 
+
 tests['getenv.array() nonexistent variable'] = function() {
   assert.throws(function() {
     getenv.array('TEST_GETENV_NONEXISTENT');
   });
 };
+
+
+tests['getenv.array() nonexistent variable with fallback'] = function() {
+  var expect = ['A', 'B', 'C'];
+  var arrayVar = getenv.array('TEST_GETENV_NONEXISTENT', 'string', expect);
+  assert.deepEqual(arrayVar, expect);
+};
+
 
 tests['getenv.array() nonexistent type'] = function() {
   assert.throws(function() {
