@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/ctavan/getenv.png)](http://travis-ci.org/ctavan/getenv)
 
-Helper to get and typecast environment variables.
+Helper to get and typecast environment variables. This is especially useful if you are building [Twelve-Factor-Apps](http://www.12factor.net/) where all configuration is stored in the environment.
 
 ## Installation
 

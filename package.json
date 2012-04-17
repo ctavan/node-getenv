@@ -24,6 +24,8 @@
   "keywords": [
     "env",
     "environment",
-    "config"
+    "config",
+    "configuration",
+    "12factor"
   ]
 }
