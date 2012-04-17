@@ -1,0 +1,29 @@
+{
+  "name": "getenv",
+  "description": "Get and typecast environment variables.",
+  "author": "Christoph Tavan <dev@tavan.de>",
+  "contributors": [
+    "Moritz von Hase",
+    "Jonas Dohse <jonas@dohse.ch>"
+  ],
+  "version": "0.1.0",
+  "homepage": "https://github.com/ctavan/getenv",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ctavan/getenv.git"
+  },
+  "main": "./index",
+  "scripts": {
+    "test": "make test"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+    "env",
+    "environment",
+    "config"
+  ]
+}
