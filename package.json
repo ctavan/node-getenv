@@ -6,11 +6,11 @@
     "Moritz von Hase",
     "Jonas Dohse <jonas@dohse.ch>"
   ],
-  "version": "0.1.0",
-  "homepage": "https://github.com/ctavan/getenv",
+  "version": "0.2.0",
+  "homepage": "https://github.com/ctavan/node-getenv",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ctavan/getenv.git"
+    "url": "git://github.com/ctavan/node-getenv.git"
   },
   "main": "./index",
   "scripts": {

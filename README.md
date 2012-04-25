@@ -1,6 +1,6 @@
 # getenv
 
-[![Build Status](https://secure.travis-ci.org/ctavan/getenv.png)](http://travis-ci.org/ctavan/getenv)
+[![Build Status](https://secure.travis-ci.org/ctavan/node-getenv.png)](http://travis-ci.org/ctavan/node-getenv)
 
 Helper to get and typecast environment variables. This is especially useful if you are building [Twelve-Factor-Apps](http://www.12factor.net/) where all configuration is stored in the environment.
 
