@@ -2,7 +2,7 @@ var assert = require('assert');
 
 var getenv = require('../lib/getenv');
 
-//Setting getenv vars for testing
+// Setting env vars for testing
 process.env.TEST_GETENV_EMPTY_STRING = '';
 process.env.TEST_GETENV_STRING = 'This is a string.';
 process.env.TEST_GETENV_INT1 = '10';
