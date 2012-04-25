@@ -86,6 +86,9 @@ Split value of the environment variable at each comma and return the resulting a
 
 ## Changelog
 
+### v0.2.0
+- Rename git repository
+
 ### v0.1.0
 - Initial release
 
