@@ -84,6 +84,20 @@ Return as boolean.
 
 Split value of the environment variable at each comma and return the resulting array where each value has been typecast according to the `type` parameter. An array can be provided as `fallback`.
 
+### env.multi({spec})
+
+Return a list of environment variables based on a `spec`:
+
+```javascript
+var config = getenv.multi({
+  foo: "FOO", // throws if FOO doesn't exist
+  bar: ["BAR", "defaultval"], // set a default value
+  baz: ["BAZ", "defaultval", "string"], // parse into type
+  quux: ["QUUX", undefined, "integer"] // parse & throw
+});
+
+```
+
 ## Changelog
 
 ### v0.2.0
