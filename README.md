@@ -100,6 +100,9 @@ var config = getenv.multi({
 
 ## Changelog
 
+### v0.3.0
+- Add getenv.multi() support.
+
 ### v0.2.0
 - Rename git repository
 
