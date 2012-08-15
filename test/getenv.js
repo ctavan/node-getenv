@@ -375,6 +375,112 @@ tests['getenv.array() nonexistent type'] = function() {
   });
 };
 
+tests['getenv.multi([string]) multiple env vars'] = function() {
+  var spec = {
+    foo: 'TEST_GETENV_STRING' // throws when nonexistant
+  };
+  var config = getenv.multi(spec);
+  var expect = {
+    foo: process.env.TEST_GETENV_STRING
+  };
+  assert.deepEqual(expect, config);
+};
+
+tests['getenv([string]) multiple env vars shortcut'] = function() {
+  var spec = {
+    foo: 'TEST_GETENV_STRING' // throws when nonexistant
+  };
+  var config = getenv(spec);
+  var expect = {
+    foo: process.env.TEST_GETENV_STRING
+  };
+  assert.deepEqual(expect, config);
+};
+
+
+tests['getenv.multi([string/throw]) multiple env vars'] = function() {
+  var spec = {
+    foo: 'TEST_GETENV_NONEXISTENT' // throws when nonexistant
+  };
+  assert.throws(function() {
+    var config = getenv.multi(spec);
+  });
+};
+
+tests['getenv.multi([string/typecast]) multiple env vars'] = function() {
+  var spec = {
+    foo: ['TEST_GETENV_STRING', undefined, 'string']
+  };
+  var config = getenv.multi(spec);
+  var expect = {
+    foo: process.env.TEST_GETENV_STRING
+  };
+  assert.deepEqual(expect, config);
+};
+
+tests['getenv.multi([string/typecast/defaultval]) multiple env vars'] = function() {
+  var spec = {
+    foo: ['TEST_GETENV_NONEXISTENT', 'default', 'string'] // throws when nonexistant
+  };
+  var config = getenv.multi(spec);
+  var expect = {
+    foo: 'default'
+  };
+  assert.deepEqual(expect, config);
+};
+
+tests['getenv.multi([string/typecast/throw]) multiple env vars'] = function() {
+  var spec = {
+    foo: ['TEST_GETENV_NONEXISTENT', undefined, 'string'] // throws when nonexistant
+  };
+  assert.throws(function() {
+    var config = getenv.multi(spec);
+  });
+};
+
+tests['getenv.multi([string/defaultval]) multiple env vars'] = function() {
+  var spec = {
+    foo: ['TEST_GETENV_STRING', 'default'] // throws when nonexistant
+  };
+  var config = getenv.multi(spec);
+  var expect = {
+    foo: process.env.TEST_GETENV_STRING
+  };
+  assert.deepEqual(expect, config);
+};
+
+tests['getenv.multi([string/defaultval/throw]) multiple env vars'] = function() {
+  var spec = {
+    foo: ['TEST_GETENV_NONEXISTENT', 'default'] // throws when nonexistant
+  };
+  var config = getenv.multi(spec);
+  var expect = {
+    foo: 'default'
+  };
+  assert.deepEqual(expect, config);
+};
+
+tests['getenv.multi([string/single]) multiple env vars'] = function() {
+  var spec = {
+    foo: ['TEST_GETENV_STRING'] // throws when nonexistant
+  };
+  var config = getenv.multi(spec);
+  var expect = {
+    foo: process.env.TEST_GETENV_STRING
+  };
+  assert.deepEqual(expect, config);
+};
+
+tests['getenv.multi([string/single/throw]) multiple env vars'] = function() {
+  var spec = {
+    foo: ['TEST_GETENV_NONEXISTENT'] // throws when nonexistant
+  };
+  assert.throws(function() {
+    var config = getenv.multi(spec);
+  });
+};
+
+
 Object.keys(tests).forEach(function(key) {
   console.log('Test: %s', key);
   tests[key]();
