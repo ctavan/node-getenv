@@ -111,6 +111,7 @@ var config = getenv.multi({
 - Moritz von Hase (initial author)
 - Christoph Tavan <dev@tavan.de>
 - Jonas Dohse <jonas@dohse.ch>
+- Jan Lehnardt (@janl): `getenv.multi()` support.
 
 ## License
 
