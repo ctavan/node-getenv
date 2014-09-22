@@ -98,6 +98,16 @@ var config = getenv.multi({
 
 ```
 
+### env.disableFallbacks()
+
+Disallows fallbacks in environments where you don't want to rely on brittle development defaults (e.g production, integration testing). For example, to disable fallbacks if we indicate production via `NODE_ENV`:
+
+```javascript
+if (process.env.NODE_ENV === 'production') {
+  getenv.disableFallbacks();
+}
+```
+
 ## Changelog
 
 ### v0.3.0
@@ -115,6 +125,7 @@ var config = getenv.multi({
 - Christoph Tavan <dev@tavan.de>
 - Jonas Dohse <jonas@dohse.ch>
 - Jan Lehnardt (@janl): `getenv.multi()` support.
+- Tim Ruffles <timruffles@gmail.com>: `disableFallbacks()`
 
 ## License
 
