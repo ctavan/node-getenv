@@ -10,6 +10,7 @@ tests['getenv.disableFallbacks() makes relying on fallbacks an error'] = functio
   assert.throws(function() {
     getenv.string("url", "http://localhost");
   });
+  getenv.enableFallbacks();
 };
 
 
