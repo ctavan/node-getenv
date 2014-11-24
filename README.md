@@ -110,6 +110,9 @@ if (process.env.NODE_ENV === 'production') {
 
 ## Changelog
 
+### v0.4.0
+- Add getenv.disableFallbacks() support.
+
 ### v0.3.0
 - Add getenv.multi() support.
 

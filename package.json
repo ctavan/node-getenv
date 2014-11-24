@@ -5,9 +5,10 @@
   "contributors": [
     "Moritz von Hase",
     "Jonas Dohse <jonas@dohse.ch>",
-    "Jan Lehnardt"
+    "Jan Lehnardt",
+    "Tim Ruffles <timruffles@gmail.com>"
   ],
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "https://github.com/ctavan/node-getenv",
   "repository": {
     "type": "git",
