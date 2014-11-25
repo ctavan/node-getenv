@@ -98,6 +98,16 @@ var config = getenv.multi({
 
 ```
 
+### env.url(name, [fallback])
+
+Return a parsed URL as per Node's `require("url").parse`. N.B `url` doesn't validate URLs, so be sure it includes a protocol or you'll get deeply weird results.
+
+```javascript
+var serviceUrl = getenv.url('SERVICE_URL');
+
+serviceUrl.port; // parsed port number
+```
+
 ### env.disableFallbacks()
 
 Disallows fallbacks in environments where you don't want to rely on brittle development defaults (e.g production, integration testing). For example, to disable fallbacks if we indicate production via `NODE_ENV`:
@@ -109,6 +119,9 @@ if (process.env.NODE_ENV === 'production') {
 ```
 
 ## Changelog
+
+### v0.5.0
+- Add getenv.url() support.
 
 ### v0.4.0
 - Add getenv.disableFallbacks() support.
@@ -128,7 +141,7 @@ if (process.env.NODE_ENV === 'production') {
 - Christoph Tavan <dev@tavan.de>
 - Jonas Dohse <jonas@dohse.ch>
 - Jan Lehnardt (@janl): `getenv.multi()` support.
-- Tim Ruffles <timruffles@gmail.com>: `disableFallbacks()`
+- Tim Ruffles <timruffles@gmail.com>: `disableFallbacks()`, `url()`
 
 ## License
 
