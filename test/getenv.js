@@ -35,6 +35,10 @@ process.env.TEST_GETENV_BOOL_ARRAY_INVALID1 = 'true, 1, true';
 process.env.TEST_GETENV_BOOL_ARRAY_INVALID2 = 'true, 1.2, true';
 process.env.TEST_GETENV_BOOL_ARRAY_INVALID3 = 'true, abc, true';
 
+process.env.TEST_GETENV_URL_1 = "tcp://localhost:80";
+process.env.TEST_GETENV_URL_2 = "tcp://localhost:2993";
+process.env.TEST_GETENV_URL_3 = "http://192.162.22.11:2993";
+
 var tests = {};
 
 tests['getenv() same as getenv.string()'] = function() {
@@ -477,6 +481,26 @@ tests['getenv.multi([string/single/throw]) multiple env vars'] = function() {
   };
   assert.throws(function() {
     var config = getenv.multi(spec);
+  });
+};
+
+tests['getenv.url() valid input'] = function() {
+
+  var expected = [
+    {hostname: "localhost", port: "80", protocol: "tcp:"},
+    {hostname: "localhost", port: "2993", protocol: "tcp:"},
+    {hostname: "192.162.22.11", port: "2993", protocol: "http:"},
+  ];
+
+  var prefix = "TEST_GETENV_URL_";
+
+  expected.forEach(function(expectation, i) {
+    var parsed = getenv.url(prefix + (i + 1));
+    var actual = Object.keys(expectation).reduce(function(h, key) {
+      h[key] = parsed[key];
+      return h;
+    }, {});
+    assert.deepEqual(actual, expectation);
   });
 };
 
