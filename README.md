@@ -78,7 +78,11 @@ Return as float number.
 
 ### env.bool(name, [fallback])
 
-Return as boolean.
+Return as boolean. Only allows true/false as valid values.
+
+### env.boolish(name, [fallback])
+
+Return as boolean. Allows true/false/1/0 as valid values.
 
 ### env.array(name, [type], [fallback])
 
@@ -119,6 +123,9 @@ if (process.env.NODE_ENV === 'production') {
 ```
 
 ## Changelog
+
+### v0.5.1
+- Added getenv.boolish() support.
 
 ### v0.5.0
 - Add getenv.url() support.

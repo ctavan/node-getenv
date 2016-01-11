@@ -221,6 +221,41 @@ tests['getenv.bool() invalid input'] = function() {
   });
 };
 
+tests['getenv.boolish() valid input'] = function() {
+  var data = [{
+    varName: 'TEST_GETENV_FALSE',
+    expected: false
+  }, {
+    varName: 'TEST_GETENV_TRUE',
+    expected: true
+  }, {
+    varName: 'TEST_GETENV_NOT_REALLY_FALSE',
+    expected: false
+  }, {
+    varName: 'TEST_GETENV_NOT_REALLY_TRUE',
+    expected: true
+  }];
+
+  data.forEach(function(item) {
+    var boolVar = getenv.boolish(item.varName);
+    assert.strictEqual(boolVar, item.expected);
+  });
+};
+
+
+tests['getenv.boolish() invalid input'] = function() {
+  var data = [
+    { varName: 'TEST_GETENV_STRING' },
+    { varName: 'TEST_GETENV_EMPTY_STRING' }
+  ];
+
+  data.forEach(function(item) {
+    assert.throws(function() {
+      var boolVar = getenv.boolish(item.varName);
+    });
+  });
+};
+
 
 tests['getenv.bool() nonexistent variable'] = function() {
   assert.throws(function() {
