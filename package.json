@@ -8,7 +8,7 @@
     "Jan Lehnardt",
     "Tim Ruffles <timruffles@gmail.com>"
   ],
-  "version": "0.5.1",
+  "version": "0.6.0",
   "homepage": "https://github.com/ctavan/node-getenv",
   "repository": {
     "type": "git",

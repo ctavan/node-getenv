@@ -124,7 +124,7 @@ if (process.env.NODE_ENV === 'production') {
 
 ## Changelog
 
-### v0.5.1
+### v0.6.0
 - Added getenv.boolish() support.
 
 ### v0.5.0
