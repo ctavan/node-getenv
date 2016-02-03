@@ -97,7 +97,7 @@ var config = getenv.multi({
   foo: "FOO", // throws if FOO doesn't exist
   bar: ["BAR", "defaultval"], // set a default value
   baz: ["BAZ", "defaultval", "string"], // parse into type
-  quux: ["QUUX", undefined, "integer"] // parse & throw
+  quux: ["QUUX", undefined, "int"] // parse & throw
 });
 
 ```
