@@ -3,6 +3,7 @@ var assert = require('assert');
 var getenv = require('../lib/getenv');
 
 // Setting env vars for testing
+process.env.NODE_ENV = 'testing';
 process.env.TEST_GETENV_EMPTY_STRING = '';
 process.env.TEST_GETENV_STRING = 'This is a string.';
 process.env.TEST_GETENV_INT1 = '10';
@@ -537,6 +538,22 @@ tests['getenv.url() valid input'] = function() {
     }, {});
     assert.deepEqual(actual, expectation);
   });
+};
+
+tests['getenv environment fallback'] = function() {
+  var intVar = getenv.int('TEST_GETENEV_ENV_FALLBACK', {
+    testing: 55
+  });
+  assert.strictEqual(intVar, 55);
+};
+
+tests['getenv environment fallback throws'] = function() {
+  assert.throws(function () {
+      getenv.int('TEST_GETENEV_ENV_FALLBACK', {
+        development: 55
+      })
+    }
+  );
 };
 
 
