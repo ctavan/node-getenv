@@ -541,15 +541,28 @@ tests['getenv.url() valid input'] = function() {
 };
 
 tests['getenv environment fallback'] = function() {
-  var intVar = getenv.int('TEST_GETENEV_ENV_FALLBACK', {
+  getenv.enableObjectFallback();
+  var intVar = getenv.int('TEST_GETENV_ENV_FALLBACK', {
     testing: 55
   });
   assert.strictEqual(intVar, 55);
+  getenv.disableObjectFallback();
 };
 
 tests['getenv environment fallback throws'] = function() {
+  getenv.enableObjectFallback();
   assert.throws(function () {
-      getenv.int('TEST_GETENEV_ENV_FALLBACK', {
+      getenv.int('TEST_GETENV_ENV_FALLBACK', {
+        development: 55
+      })
+    }
+  );
+  getenv.disableObjectFallback();
+};
+
+tests['getenv environment fallback throws on object sent'] = function() {
+  assert.throws(function () {
+      getenv.int('TEST_GETENV_ENV_FALLBACK', {
         development: 55
       })
     }
