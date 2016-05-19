@@ -569,6 +569,30 @@ tests['getenv environment fallback throws on object sent'] = function() {
   );
 };
 
+tests['getenv.multi([int]) multiple env vars with object fallbacks'] = function() {
+  getenv.enableObjectFallback();
+  var spec = {
+    foo: ['TEST_GETENV_ENV_FALLBACK', {testing: 33}, 'int'] // throws when nonexistant
+  };
+  var config = getenv.multi(spec);
+  var expect = {
+    foo: 33
+  };
+  assert.deepEqual(expect, config);
+  getenv.disableObjectFallback();
+};
+
+tests['getenv.multi([int]) multiple env vars with object fallbacks throws'] = function() {
+  getenv.enableObjectFallback();
+  // use a different environment
+  var spec = {
+    foo: ['TEST_GETENV_ENV_FALLBACK', {development: 33}, 'int'] // throws when nonexistant
+  };
+  assert.throws(function () {
+    getenv.multi(spec);
+  });
+  getenv.disableObjectFallback();
+};
 
 Object.keys(tests).forEach(function(key) {
   console.log('Test: %s', key);

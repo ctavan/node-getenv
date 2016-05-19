@@ -6,9 +6,10 @@
     "Moritz von Hase",
     "Jonas Dohse <jonas@dohse.ch>",
     "Jan Lehnardt",
+    "Sau Ramirez",
     "Tim Ruffles <timruffles@gmail.com>"
   ],
-  "version": "0.6.0",
+  "version": "0.7.0",
   "homepage": "https://github.com/ctavan/node-getenv",
   "repository": {
     "type": "git",

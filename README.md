@@ -122,7 +122,33 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
+### env.enableObjectFallback()
+
+Enables having and object fallback for different environments by using the `NODE_ENV` environment variable.
+
+```javascript
+process.env.NODE_ENV = 'development'
+getenv.enableObjectFallback();
+getenv.int('GETENV_INT', { development: 3 }) // returns 3
+
+// missing production default
+process.env.NODE_ENV = 'production'
+getenv.int('GETENV_INT', { development: 3 }) // throws if not set
+
+getenv.disableObjectFallback();
+
+// multi suppport
+getenv.enableObjectFallback();
+process.env.NODE_ENV = 'development'
+getenv.multi({
+  foo: ['FOO', { development: 33}, 'int']
+})
+```
+
 ## Changelog
+
+### v0.7.0
+- Added getenv.enableObjectFallback() support
 
 ### v0.6.0
 - Added getenv.boolish() support.
@@ -149,6 +175,7 @@ if (process.env.NODE_ENV === 'production') {
 - Jonas Dohse <jonas@dohse.ch>
 - Jan Lehnardt (@janl): `getenv.multi()` support.
 - Tim Ruffles <timruffles@gmail.com>: `disableFallbacks()`, `url()`
+- Sau Ramirez <sau@three-dimensional.space>: `getenv.enableObjectFallback()`
 
 ## License
 
