@@ -122,6 +122,30 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
+### env.disableErrors()
+
+`getenv` won't throw any error. If a fallback value is provided, that will be returned, else `undefined` is returned.
+
+```javascript
+getenv.disableErrors();
+console.log(getenv("RANDOM"));
+// undefined
+```
+
+### env.enableErrors()
+
+Revert the effect of `disableErrors()`.
+
+```javascript
+getenv.disableErrors();
+console.log(getenv("RANDOM"));
+// undefined
+
+getenv.enableErrors();
+console.log(getenv("RANDOM"));
+// Error: GetEnv.Nonexistent: RANDOM does not exist and no fallback value provided.
+```
+
 ## Changelog
 
 ### v0.6.0
@@ -149,6 +173,7 @@ if (process.env.NODE_ENV === 'production') {
 - Jonas Dohse <jonas@dohse.ch>
 - Jan Lehnardt (@janl): `getenv.multi()` support.
 - Tim Ruffles <timruffles@gmail.com>: `disableFallbacks()`, `url()`
+- Ashwani Agarwal <ashwani.a@outlook.com>: `disableErrors()`, `enableErrors()`
 
 ## License
 
