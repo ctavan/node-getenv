@@ -122,13 +122,13 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
-### env.enableObjectFallback()
+### env.enableObjectFallback(name)
 
-Enables having and object fallback for different environments by using the `NODE_ENV` environment variable.
+Enables having and object fallback for different environments by using the name variable passed.
 
 ```javascript
 process.env.NODE_ENV = 'development'
-getenv.enableObjectFallback();
+getenv.enableObjectFallback('development');
 getenv.int('GETENV_INT', { development: 3 }) // returns 3
 
 // missing production default
@@ -138,7 +138,7 @@ getenv.int('GETENV_INT', { development: 3 }) // throws if not set
 getenv.disableObjectFallback();
 
 // multi suppport
-getenv.enableObjectFallback();
+getenv.enableObjectFallback('development');
 process.env.NODE_ENV = 'development'
 getenv.multi({
   foo: ['FOO', { development: 33}, 'int']

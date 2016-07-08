@@ -541,7 +541,7 @@ tests['getenv.url() valid input'] = function() {
 };
 
 tests['getenv environment fallback'] = function() {
-  getenv.enableObjectFallback();
+  getenv.enableObjectFallback('testing');
   var intVar = getenv.int('TEST_GETENV_ENV_FALLBACK', {
     testing: 55
   });
@@ -550,7 +550,7 @@ tests['getenv environment fallback'] = function() {
 };
 
 tests['getenv environment fallback throws'] = function() {
-  getenv.enableObjectFallback();
+  getenv.enableObjectFallback('testing');
   assert.throws(function () {
       getenv.int('TEST_GETENV_ENV_FALLBACK', {
         development: 55
@@ -570,7 +570,7 @@ tests['getenv environment fallback throws on object sent'] = function() {
 };
 
 tests['getenv.multi([int]) multiple env vars with object fallbacks'] = function() {
-  getenv.enableObjectFallback();
+  getenv.enableObjectFallback('testing');
   var spec = {
     foo: ['TEST_GETENV_ENV_FALLBACK', {testing: 33}, 'int'] // throws when nonexistant
   };
@@ -583,7 +583,7 @@ tests['getenv.multi([int]) multiple env vars with object fallbacks'] = function(
 };
 
 tests['getenv.multi([int]) multiple env vars with object fallbacks throws'] = function() {
-  getenv.enableObjectFallback();
+  getenv.enableObjectFallback('testing');
   // use a different environment
   var spec = {
     foo: ['TEST_GETENV_ENV_FALLBACK', {development: 33}, 'int'] // throws when nonexistant
