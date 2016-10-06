@@ -9,7 +9,7 @@
     "Tim Ruffles <timruffles@gmail.com>",
     "Ashwani Agarwal <ashwani.a@outlook.com>"
   ],
-  "version": "0.6.0",
+  "version": "0.7.0",
   "homepage": "https://github.com/ctavan/node-getenv",
   "repository": {
     "type": "git",
