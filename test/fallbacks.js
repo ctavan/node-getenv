@@ -8,7 +8,7 @@ var tests = {};
 tests['getenv.disableFallbacks() makes relying on fallbacks an error'] = function() {
   getenv.disableFallbacks();
   assert.throws(function() {
-    getenv.string("url", "http://localhost");
+    getenv.string('url', 'http://localhost');
   });
   getenv.enableFallbacks();
 };

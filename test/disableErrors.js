@@ -6,16 +6,16 @@ var tests = {};
 
 tests['getenv.disableErrors() should disable any errors'] = function() {
   getenv.disableErrors();
-  assert.strictEqual(getenv.string("url", "http://localhost"), 'http://localhost');
-  assert(getenv.string("url"), undefined);
+  assert.strictEqual(getenv.string('url', 'http://localhost'), 'http://localhost');
+  assert(getenv.string('url'), undefined);
 };
 
 tests['getenv.enableErrors() should enable errors'] = function () {
   getenv.enableErrors();
   assert.throws(function() {
-    getenv.string("url");
+    getenv.string('url');
   });
-  assert.strictEqual(getenv.string("url", "http://localhost"), 'http://localhost');
+  assert.strictEqual(getenv.string('url', 'http://localhost'), 'http://localhost');
 }
 
 Object.keys(tests).forEach(function(key) {
