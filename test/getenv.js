@@ -34,6 +34,10 @@ process.env.TEST_GETENV_BOOL_ARRAY = 'true, false, true';
 process.env.TEST_GETENV_BOOL_ARRAY_INVALID1 = 'true, 1, true';
 process.env.TEST_GETENV_BOOL_ARRAY_INVALID2 = 'true, 1.2, true';
 process.env.TEST_GETENV_BOOL_ARRAY_INVALID3 = 'true, abc, true';
+process.env.TEST_GETENV_DATE_VALID1 = '2019-04-08T12:51:21.137Z';
+process.env.TEST_GETENV_DATE_VALID2 = 'Sun Mar 10 2019 12:51:21 GMT+0000 (GMT)'
+process.env.TEST_GETENV_DATE_INVALID1 = '10 2019 12:51:21 GMT+0000 (GMT)'
+process.env.TEST_GETENV_DATE_INVALID2 = '201-04-08T12:51:21.137Z';
 
 process.env.TEST_GETENV_URL_1 = 'tcp://localhost:80';
 process.env.TEST_GETENV_URL_2 = 'tcp://localhost:2993';
@@ -252,6 +256,35 @@ tests['getenv.boolish() invalid input'] = function() {
   data.forEach(function(item) {
     assert.throws(function() {
       var boolVar = getenv.boolish(item.varName);
+    });
+  });
+};
+
+tests['getenv.date() valid input'] = function() {
+  var data = [{
+    varName: 'TEST_GETENV_DATE_VALID1',
+    expected: '2019-04-08T12:51:21.137Z'
+  }, 
+  {
+    varName: 'TEST_GETENV_DATE_VALID2',
+    expected: 'Sun Mar 10 2019 12:51:21 GMT+0000 (GMT)'
+  }];
+
+  data.forEach(function(item) {
+    var dateVar = getenv.date(item.varName);
+    assert.strictEqual(dateVar, item.expected);
+  });
+};
+
+
+tests['getenv.date() invalid input'] = function() {
+  var data = [
+    { varName: 'TEST_GETENV_DATE_INVALID1', varName: 'TEST_GETENV_DATE_INVALID2' }
+  ];
+
+  data.forEach(function(item) {
+    assert.throws(function() {
+      var dateVar = getenv.date(item.varName);
     });
   });
 };
