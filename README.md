@@ -88,6 +88,10 @@ Return as boolean. Allows true/false/1/0 as valid values.
 
 Split value of the environment variable at each comma and return the resulting array where each value has been typecast according to the `type` parameter. An array can be provided as `fallback`.
 
+### env.date(name, [fallback])
+
+Return as date object. Will validate that what is given is a valid date format.
+
 ### env.multi({spec})
 
 Return a list of environment variables based on a `spec`:
