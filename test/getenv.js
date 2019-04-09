@@ -263,16 +263,16 @@ tests['getenv.boolish() invalid input'] = function() {
 tests['getenv.date() valid input'] = function() {
   var data = [{
     varName: 'TEST_GETENV_DATE_VALID1',
-    expected: '2019-04-08T12:51:21.137Z'
+    expected: new Date('2019-04-08T12:51:21.137Z')
   }, 
   {
     varName: 'TEST_GETENV_DATE_VALID2',
-    expected: 'Sun Mar 10 2019 12:51:21 GMT+0000 (GMT)'
+    expected: new Date('Sun Mar 10 2019 12:51:21 GMT+0000 (GMT)')
   }];
 
   data.forEach(function(item) {
     var dateVar = getenv.date(item.varName);
-    assert.strictEqual(dateVar, item.expected);
+    assert.deepEqual(dateVar, item.expected);
   });
 };
 
