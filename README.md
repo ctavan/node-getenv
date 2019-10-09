@@ -149,6 +149,12 @@ console.log(getenv('RANDOM'));
 
 ## Changelog
 
+### v1.0.0
+
+- Drop support for Node.js older than 6.
+- Modernize code.
+- Add MIT License in package.json and LICENSE.md.
+
 ### v0.7.0
 
 - Add env.disableErrors() / getenv.enableErrors() support.
