@@ -20,7 +20,7 @@
     "test": "make test"
   },
   "engines": {
-    "node": "*"
+    "node": ">=6"
   },
   "dependencies": {},
   "devDependencies": {},
