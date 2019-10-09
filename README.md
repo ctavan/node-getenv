@@ -10,6 +10,8 @@ Helper to get and typecast environment variables. This is especially useful if y
 npm install getenv
 ```
 
+TypeScript types are available from the `@types/getenv` module.
+
 ## Usage
 
 Set environment variables:
