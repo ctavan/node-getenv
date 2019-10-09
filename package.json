@@ -18,7 +18,7 @@
   "main": "index.js",
   "scripts": {
     "prettier": "prettier --write *.{js,md} **/*.js",
-    "test": "make test"
+    "test": "bash -ec 'for F in test/*.js; do echo \"$F\": ; node $F; done;'"
   },
   "engines": {
     "node": ">=6"
