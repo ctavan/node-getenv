@@ -28,18 +28,18 @@ export PRIMES="2,3,5,7"
 Get and use them:
 
 ```javascript
-var getenv = require('getenv');
+const getenv = require('getenv');
 
-var host = getenv('HTTP_HOST'); // same as getenv.string('HTTP_HOST');
-var port = getenv.int('HTTP_PORT');
-var start = getenv.bool('HTTP_START');
+const host = getenv('HTTP_HOST'); // same as getenv.string('HTTP_HOST');
+const port = getenv.int('HTTP_PORT');
+const start = getenv.bool('HTTP_START');
 
 if (start === true) {
-  // var server = http.createServer();
+  // const server = http.createServer();
   // server.listen(port, host);
 }
 
-var abTestRatio = getenv.float('AB_TEST_RATIO');
+const abTestRatio = getenv.float('AB_TEST_RATIO');
 
 if (Math.random() < abTestRatio) {
   // test A
@@ -47,12 +47,12 @@ if (Math.random() < abTestRatio) {
   // test B
 }
 
-var keywords = getenv.array('KEYWORDS');
+const keywords = getenv.array('KEYWORDS');
 keywords.forEach(function(keyword) {
   // console.log(keyword);
 });
 
-var primes = getenv.array('PRIMES', 'int');
+const primes = getenv.array('PRIMES', 'int');
 primes.forEach(function(prime) {
   // console.log(prime, typeof prime);
 });
@@ -95,7 +95,7 @@ Split value of the environment variable at each comma and return the resulting a
 Return a list of environment variables based on a `spec`:
 
 ```javascript
-var config = getenv.multi({
+const config = getenv.multi({
   foo: 'FOO', // throws if FOO doesn't exist
   bar: ['BAR', 'defaultval'], // set a default value
   baz: ['BAZ', 'defaultval', 'string'], // parse into type
@@ -108,7 +108,7 @@ var config = getenv.multi({
 Return a parsed URL as per Node's `require("url").parse`. N.B `url` doesn't validate URLs, so be sure it includes a protocol or you'll get deeply weird results.
 
 ```javascript
-var serviceUrl = getenv.url('SERVICE_URL');
+const serviceUrl = getenv.url('SERVICE_URL');
 
 serviceUrl.port; // parsed port number
 ```

@@ -1,8 +1,8 @@
-var assert = require('assert');
+const assert = require('assert');
 
-var getenv = require('../index');
+const getenv = require('../index');
 
-var tests = {};
+const tests = {};
 
 // order dependent test
 tests['getenv.disableFallbacks() makes relying on fallbacks an error'] = function() {

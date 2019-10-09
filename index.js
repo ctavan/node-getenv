@@ -1,11 +1,11 @@
-var util = require('util');
-var url = require('url');
+const util = require('util');
+const url = require('url');
 
-var fallbacksDisabled = false;
-var throwError = true;
+let fallbacksDisabled = false;
+let throwError = true;
 
 function _value(varName, fallback) {
-  var value = process.env[varName];
+  const value = process.env[varName];
   if (value === undefined) {
     if (fallback === undefined && !throwError) {
       return value;
@@ -28,12 +28,12 @@ function _value(varName, fallback) {
   return value;
 }
 
-var convert = {
+const convert = {
   string: function(value) {
     return '' + value;
   },
   int: function(value) {
-    var isInt = value.match(/^-?\d+$/);
+    const isInt = value.match(/^-?\d+$/);
     if (!isInt) {
       throw new Error('GetEnv.NoInteger: ' + value + ' is not an integer.');
     }
@@ -41,12 +41,12 @@ var convert = {
     return +value;
   },
   float: function(value) {
-    var isInfinity = +value === Infinity || +value === -Infinity;
+    const isInfinity = +value === Infinity || +value === -Infinity;
     if (isInfinity) {
       throw new Error('GetEnv.Infinity: ' + value + ' is set to +/-Infinity.');
     }
 
-    var isFloat = !(isNaN(value) || value === '');
+    const isFloat = !(isNaN(value) || value === '');
     if (!isFloat) {
       throw new Error('GetEnv.NoFloat: ' + value + ' is not a number.');
     }
@@ -54,7 +54,7 @@ var convert = {
     return +value;
   },
   bool: function(value) {
-    var isBool = value === 'true' || value === 'false';
+    const isBool = value === 'true' || value === 'false';
     if (!isBool) {
       throw new Error('GetEnv.NoBoolean: ' + value + ' is not a boolean.');
     }
@@ -65,7 +65,7 @@ var convert = {
     try {
       return convert.bool(value);
     } catch (err) {
-      var isBool = value === '1' || value === '0';
+      const isBool = value === '1' || value === '0';
       if (!isBool) {
         throw new Error('GetEnv.NoBoolean: ' + value + ' is not a boolean.');
       }
@@ -80,7 +80,7 @@ function converter(type) {
   return function(varName, fallback) {
     if (typeof varName == 'string') {
       // default
-      var value = _value(varName, fallback);
+      const value = _value(varName, fallback);
       return convert[type](value);
     } else {
       // multibert!
@@ -89,7 +89,7 @@ function converter(type) {
   };
 }
 
-var getenv = converter('string');
+const getenv = converter('string');
 
 Object.keys(convert).forEach(function(type) {
   getenv[type] = converter(type);
@@ -100,15 +100,14 @@ getenv.array = function array(varName, type, fallback) {
   if (Object.keys(convert).indexOf(type) === -1) {
     throw new Error('GetEnv.ArrayUndefinedType: Unknown array type ' + type);
   }
-  var value = _value(varName, fallback);
+  const value = _value(varName, fallback);
   return value.split(/\s*,\s*/).map(convert[type]);
 };
 
 getenv.multi = function multi(spec) {
-  var key, value;
-  var result = {};
-  for (var key in spec) {
-    var value = spec[key];
+  const result = {};
+  for (let key in spec) {
+    const value = spec[key];
     if (util.isArray(value)) {
       // default value & typecast
       switch (value.length) {

@@ -1,8 +1,8 @@
-var assert = require('assert');
+const assert = require('assert');
 
-var getenv = require('../index');
+const getenv = require('../index');
 
-var tests = {};
+const tests = {};
 
 tests['getenv.disableErrors() should disable any errors'] = function() {
   getenv.disableErrors();

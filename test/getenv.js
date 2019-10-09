@@ -1,6 +1,6 @@
-var assert = require('assert');
+const assert = require('assert');
 
-var getenv = require('../index');
+const getenv = require('../index');
 
 // Setting env vars for testing
 process.env.TEST_GETENV_EMPTY_STRING = '';
@@ -39,10 +39,10 @@ process.env.TEST_GETENV_URL_1 = 'tcp://localhost:80';
 process.env.TEST_GETENV_URL_2 = 'tcp://localhost:2993';
 process.env.TEST_GETENV_URL_3 = 'http://192.162.22.11:2993';
 
-var tests = {};
+const tests = {};
 
 tests['getenv() same as getenv.string()'] = function() {
-  var data = [
+  const data = [
     {
       varName: 'TEST_GETENV_STRING',
       expected: 'This is a string.',
@@ -54,14 +54,14 @@ tests['getenv() same as getenv.string()'] = function() {
   ];
 
   data.forEach(function(item) {
-    var stringVar1 = getenv(item.varName);
-    var stringVar2 = getenv.string(item.varName);
+    const stringVar1 = getenv(item.varName);
+    const stringVar2 = getenv.string(item.varName);
     assert.strictEqual(stringVar1, stringVar2);
   });
 };
 
 tests['getenv.string() valid input'] = function() {
-  var data = [
+  const data = [
     {
       varName: 'TEST_GETENV_STRING',
       expected: 'This is a string.',
@@ -73,7 +73,7 @@ tests['getenv.string() valid input'] = function() {
   ];
 
   data.forEach(function(item) {
-    var stringVar = getenv.string(item.varName);
+    const stringVar = getenv.string(item.varName);
     assert.strictEqual(stringVar, item.expected);
   });
 };
@@ -88,15 +88,15 @@ tests['getenv.string() nonexistent variable'] = function() {
 };
 
 tests['getenv.string() nonexistent variable with fallback'] = function() {
-  var expect = 'fallback';
-  var stringVar = getenv.string('TEST_GETENV_NONEXISTENT', expect);
+  const expect = 'fallback';
+  let stringVar = getenv.string('TEST_GETENV_NONEXISTENT', expect);
   assert.strictEqual(stringVar, expect);
   stringVar = getenv('TEST_GETENV_NONEXISTENT', expect);
   assert.strictEqual(stringVar, expect);
 };
 
 tests['getenv.int() valid input'] = function() {
-  var data = [
+  const data = [
     {
       varName: 'TEST_GETENV_INT1',
       expected: 10,
@@ -114,13 +114,13 @@ tests['getenv.int() valid input'] = function() {
   ];
 
   data.forEach(function(item) {
-    var intVar = getenv.int(item.varName);
+    const intVar = getenv.int(item.varName);
     assert.strictEqual(intVar, item.expected);
   });
 };
 
 tests['getenv.int() invalid input'] = function() {
-  var data = [
+  const data = [
     { varName: 'TEST_GETENV_FLOAT' },
     { varName: 'TEST_GETENV_WRONG_NUMBER_INPUT' },
     { varName: 'TEST_GETENV_EMPTY_STRING' },
@@ -130,7 +130,7 @@ tests['getenv.int() invalid input'] = function() {
 
   data.forEach(function(item) {
     assert.throws(function() {
-      var intVar = getenv.int(item.varName);
+      const intVar = getenv.int(item.varName);
     });
   });
 };
@@ -142,13 +142,13 @@ tests['getenv.int() nonexistent variable'] = function() {
 };
 
 tests['getenv.int() nonexistent variable with fallback'] = function() {
-  var expect = 10;
-  var intVar = getenv.int('TEST_GETENV_NONEXISTENT', expect);
+  const expect = 10;
+  const intVar = getenv.int('TEST_GETENV_NONEXISTENT', expect);
   assert.strictEqual(intVar, expect);
 };
 
 tests['getenv.float() valid input'] = function() {
-  var data = [
+  const data = [
     {
       varName: 'TEST_GETENV_FLOAT1',
       expected: 12.3,
@@ -160,13 +160,13 @@ tests['getenv.float() valid input'] = function() {
   ];
 
   data.forEach(function(item) {
-    var floatVar = getenv.float(item.varName);
+    const floatVar = getenv.float(item.varName);
     assert.strictEqual(floatVar, item.expected);
   });
 };
 
 tests['getenv.float() invalid input'] = function() {
-  var data = [
+  const data = [
     { varName: 'TEST_GETENV_WRONG_NUMBER_INPUT' },
     { varName: 'TEST_GETENV_EMPTY_STRING' },
     { varName: 'TEST_GETENV_INFINITY1' },
@@ -175,7 +175,7 @@ tests['getenv.float() invalid input'] = function() {
 
   data.forEach(function(item) {
     assert.throws(function() {
-      var floatVar = getenv.float(item.varName);
+      const floatVar = getenv.float(item.varName);
     });
   });
 };
@@ -187,13 +187,13 @@ tests['getenv.float() nonexistent variable'] = function() {
 };
 
 tests['getenv.float() nonexistent variable with fallback'] = function() {
-  var expect = 2.2;
-  var floatVar = getenv.float('TEST_GETENV_NONEXISTENT', expect);
+  const expect = 2.2;
+  const floatVar = getenv.float('TEST_GETENV_NONEXISTENT', expect);
   assert.strictEqual(floatVar, expect);
 };
 
 tests['getenv.bool() valid input'] = function() {
-  var data = [
+  const data = [
     {
       varName: 'TEST_GETENV_FALSE',
       expected: false,
@@ -205,13 +205,13 @@ tests['getenv.bool() valid input'] = function() {
   ];
 
   data.forEach(function(item) {
-    var boolVar = getenv.bool(item.varName);
+    const boolVar = getenv.bool(item.varName);
     assert.strictEqual(boolVar, item.expected);
   });
 };
 
 tests['getenv.bool() invalid input'] = function() {
-  var data = [
+  const data = [
     { varName: 'TEST_GETENV_STRING' },
     { varName: 'TEST_GETENV_EMPTY_STRING' },
     { varName: 'TEST_GETENV_NOT_REALLY_TRUE' },
@@ -220,13 +220,13 @@ tests['getenv.bool() invalid input'] = function() {
 
   data.forEach(function(item) {
     assert.throws(function() {
-      var boolVar = getenv.bool(item.varName);
+      const boolVar = getenv.bool(item.varName);
     });
   });
 };
 
 tests['getenv.boolish() valid input'] = function() {
-  var data = [
+  const data = [
     {
       varName: 'TEST_GETENV_FALSE',
       expected: false,
@@ -246,17 +246,17 @@ tests['getenv.boolish() valid input'] = function() {
   ];
 
   data.forEach(function(item) {
-    var boolVar = getenv.boolish(item.varName);
+    const boolVar = getenv.boolish(item.varName);
     assert.strictEqual(boolVar, item.expected);
   });
 };
 
 tests['getenv.boolish() invalid input'] = function() {
-  var data = [{ varName: 'TEST_GETENV_STRING' }, { varName: 'TEST_GETENV_EMPTY_STRING' }];
+  const data = [{ varName: 'TEST_GETENV_STRING' }, { varName: 'TEST_GETENV_EMPTY_STRING' }];
 
   data.forEach(function(item) {
     assert.throws(function() {
-      var boolVar = getenv.boolish(item.varName);
+      const boolVar = getenv.boolish(item.varName);
     });
   });
 };
@@ -268,13 +268,13 @@ tests['getenv.bool() nonexistent variable'] = function() {
 };
 
 tests['getenv.bool() nonexistent variable with fallback'] = function() {
-  var expect = true;
-  var boolVar = getenv.bool('TEST_GETENV_NONEXISTENT', expect);
+  const expect = true;
+  const boolVar = getenv.bool('TEST_GETENV_NONEXISTENT', expect);
   assert.strictEqual(boolVar, expect);
 };
 
 tests['getenv.array() valid string (default) input'] = function() {
-  var data = [
+  const data = [
     {
       varName: 'TEST_GETENV_EMPTY_STRING',
       expected: [''],
@@ -302,13 +302,13 @@ tests['getenv.array() valid string (default) input'] = function() {
   ];
 
   data.forEach(function(item) {
-    var arrayVar = getenv.array(item.varName);
+    const arrayVar = getenv.array(item.varName);
     assert.deepEqual(arrayVar, item.expected);
   });
 };
 
 tests['getenv.array() valid integer input'] = function() {
-  var data = [
+  const data = [
     {
       varName: 'TEST_GETENV_INT_ARRAY',
       expected: [1, 2, 3],
@@ -316,18 +316,18 @@ tests['getenv.array() valid integer input'] = function() {
   ];
 
   data.forEach(function(item) {
-    var arrayVar = getenv.array(item.varName, 'int');
+    const arrayVar = getenv.array(item.varName, 'int');
     // @TODO Something like https://github.com/joyent/node/issues/594 would be
     // handy.
     assert.strictEqual(arrayVar.length, item.expected.length);
-    for (var i = 0; i < item.expected.length; i++) {
+    for (let i = 0; i < item.expected.length; i++) {
       assert.strictEqual(arrayVar[i], item.expected[i]);
     }
   });
 };
 
 tests['getenv.array() invalid integer input'] = function() {
-  var data = [
+  const data = [
     { varName: 'TEST_GETENV_INT_ARRAY_INVALID1' },
     { varName: 'TEST_GETENV_INT_ARRAY_INVALID2' },
     { varName: 'TEST_GETENV_INT_ARRAY_INVALID3' },
@@ -335,13 +335,13 @@ tests['getenv.array() invalid integer input'] = function() {
 
   data.forEach(function(item) {
     assert.throws(function() {
-      var data = getenv.array(item.varName, 'int');
+      const data = getenv.array(item.varName, 'int');
     });
   });
 };
 
 tests['getenv.array() valid float input'] = function() {
-  var data = [
+  const data = [
     {
       varName: 'TEST_GETENV_FLOAT_ARRAY',
       expected: [1.9, 2, 3e5],
@@ -349,16 +349,16 @@ tests['getenv.array() valid float input'] = function() {
   ];
 
   data.forEach(function(item) {
-    var arrayVar = getenv.array(item.varName, 'float');
+    const arrayVar = getenv.array(item.varName, 'float');
     assert.strictEqual(arrayVar.length, item.expected.length);
-    for (var i = 0; i < item.expected.length; i++) {
+    for (let i = 0; i < item.expected.length; i++) {
       assert.strictEqual(arrayVar[i], item.expected[i]);
     }
   });
 };
 
 tests['getenv.array() invalid float input'] = function() {
-  var data = [
+  const data = [
     { varName: 'TEST_GETENV_FLOAT_ARRAY_INVALID1' },
     { varName: 'TEST_GETENV_FLOAT_ARRAY_INVALID2' },
     { varName: 'TEST_GETENV_FLOAT_ARRAY_INVALID3' },
@@ -366,13 +366,13 @@ tests['getenv.array() invalid float input'] = function() {
 
   data.forEach(function(item) {
     assert.throws(function() {
-      var data = getenv.array(item.varName, 'float');
+      const data = getenv.array(item.varName, 'float');
     });
   });
 };
 
 tests['getenv.array() valid bool input'] = function() {
-  var data = [
+  const data = [
     {
       varName: 'TEST_GETENV_BOOL_ARRAY',
       expected: [true, false, true],
@@ -380,16 +380,16 @@ tests['getenv.array() valid bool input'] = function() {
   ];
 
   data.forEach(function(item) {
-    var arrayVar = getenv.array(item.varName, 'bool');
+    const arrayVar = getenv.array(item.varName, 'bool');
     assert.strictEqual(arrayVar.length, item.expected.length);
-    for (var i = 0; i < item.expected.length; i++) {
+    for (let i = 0; i < item.expected.length; i++) {
       assert.strictEqual(arrayVar[i], item.expected[i]);
     }
   });
 };
 
 tests['getenv.array() invalid bool input'] = function() {
-  var data = [
+  const data = [
     { varName: 'TEST_GETENV_BOOL_ARRAY_INVALID1' },
     { varName: 'TEST_GETENV_BOOL_ARRAY_INVALID2' },
     { varName: 'TEST_GETENV_BOOL_ARRAY_INVALID3' },
@@ -397,7 +397,7 @@ tests['getenv.array() invalid bool input'] = function() {
 
   data.forEach(function(item) {
     assert.throws(function() {
-      var data = getenv.array(item.varName, 'bool');
+      const data = getenv.array(item.varName, 'bool');
     });
   });
 };
@@ -409,8 +409,8 @@ tests['getenv.array() nonexistent variable'] = function() {
 };
 
 tests['getenv.array() nonexistent variable with fallback'] = function() {
-  var expect = ['A', 'B', 'C'];
-  var arrayVar = getenv.array('TEST_GETENV_NONEXISTENT', 'string', expect);
+  const expect = ['A', 'B', 'C'];
+  const arrayVar = getenv.array('TEST_GETENV_NONEXISTENT', 'string', expect);
   assert.deepEqual(arrayVar, expect);
 };
 
@@ -421,121 +421,121 @@ tests['getenv.array() nonexistent type'] = function() {
 };
 
 tests['getenv.multi([string]) multiple env vars'] = function() {
-  var spec = {
+  const spec = {
     foo: 'TEST_GETENV_STRING', // throws when nonexistant
   };
-  var config = getenv.multi(spec);
-  var expect = {
+  const config = getenv.multi(spec);
+  const expect = {
     foo: process.env.TEST_GETENV_STRING,
   };
   assert.deepEqual(expect, config);
 };
 
 tests['getenv([string]) multiple env vars shortcut'] = function() {
-  var spec = {
+  const spec = {
     foo: 'TEST_GETENV_STRING', // throws when nonexistant
   };
-  var config = getenv(spec);
-  var expect = {
+  const config = getenv(spec);
+  const expect = {
     foo: process.env.TEST_GETENV_STRING,
   };
   assert.deepEqual(expect, config);
 };
 
 tests['getenv.multi([string/throw]) multiple env vars'] = function() {
-  var spec = {
+  const spec = {
     foo: 'TEST_GETENV_NONEXISTENT', // throws when nonexistant
   };
   assert.throws(function() {
-    var config = getenv.multi(spec);
+    const config = getenv.multi(spec);
   });
 };
 
 tests['getenv.multi([string/typecast]) multiple env vars'] = function() {
-  var spec = {
+  const spec = {
     foo: ['TEST_GETENV_STRING', undefined, 'string'],
   };
-  var config = getenv.multi(spec);
-  var expect = {
+  const config = getenv.multi(spec);
+  const expect = {
     foo: process.env.TEST_GETENV_STRING,
   };
   assert.deepEqual(expect, config);
 };
 
 tests['getenv.multi([string/typecast/defaultval]) multiple env vars'] = function() {
-  var spec = {
+  const spec = {
     foo: ['TEST_GETENV_NONEXISTENT', 'default', 'string'], // throws when nonexistant
   };
-  var config = getenv.multi(spec);
-  var expect = {
+  const config = getenv.multi(spec);
+  const expect = {
     foo: 'default',
   };
   assert.deepEqual(expect, config);
 };
 
 tests['getenv.multi([string/typecast/throw]) multiple env vars'] = function() {
-  var spec = {
+  const spec = {
     foo: ['TEST_GETENV_NONEXISTENT', undefined, 'string'], // throws when nonexistant
   };
   assert.throws(function() {
-    var config = getenv.multi(spec);
+    const config = getenv.multi(spec);
   });
 };
 
 tests['getenv.multi([string/defaultval]) multiple env vars'] = function() {
-  var spec = {
+  const spec = {
     foo: ['TEST_GETENV_STRING', 'default'], // throws when nonexistant
   };
-  var config = getenv.multi(spec);
-  var expect = {
+  const config = getenv.multi(spec);
+  const expect = {
     foo: process.env.TEST_GETENV_STRING,
   };
   assert.deepEqual(expect, config);
 };
 
 tests['getenv.multi([string/defaultval/throw]) multiple env vars'] = function() {
-  var spec = {
+  const spec = {
     foo: ['TEST_GETENV_NONEXISTENT', 'default'], // throws when nonexistant
   };
-  var config = getenv.multi(spec);
-  var expect = {
+  const config = getenv.multi(spec);
+  const expect = {
     foo: 'default',
   };
   assert.deepEqual(expect, config);
 };
 
 tests['getenv.multi([string/single]) multiple env vars'] = function() {
-  var spec = {
+  const spec = {
     foo: ['TEST_GETENV_STRING'], // throws when nonexistant
   };
-  var config = getenv.multi(spec);
-  var expect = {
+  const config = getenv.multi(spec);
+  const expect = {
     foo: process.env.TEST_GETENV_STRING,
   };
   assert.deepEqual(expect, config);
 };
 
 tests['getenv.multi([string/single/throw]) multiple env vars'] = function() {
-  var spec = {
+  const spec = {
     foo: ['TEST_GETENV_NONEXISTENT'], // throws when nonexistant
   };
   assert.throws(function() {
-    var config = getenv.multi(spec);
+    const config = getenv.multi(spec);
   });
 };
 
 tests['getenv.url() valid input'] = function() {
-  var expected = [
+  const expected = [
     { hostname: 'localhost', port: '80', protocol: 'tcp:' },
     { hostname: 'localhost', port: '2993', protocol: 'tcp:' },
     { hostname: '192.162.22.11', port: '2993', protocol: 'http:' },
   ];
 
-  var prefix = 'TEST_GETENV_URL_';
+  const prefix = 'TEST_GETENV_URL_';
 
   expected.forEach(function(expectation, i) {
-    var parsed = getenv.url(prefix + (i + 1));
-    var actual = Object.keys(expectation).reduce(function(h, key) {
+    const parsed = getenv.url(prefix + (i + 1));
+    const actual = Object.keys(expectation).reduce(function(h, key) {
       h[key] = parsed[key];
       return h;
     }, {});
