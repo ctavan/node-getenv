@@ -10,6 +10,8 @@ Helper to get and typecast environment variables. This is especially useful if y
 npm install getenv
 ```
 
+TypeScript types are available from the `@types/getenv` module.
+
 ## Usage
 
 Set environment variables:
@@ -26,18 +28,18 @@ export PRIMES="2,3,5,7"
 Get and use them:
 
 ```javascript
-var getenv = require('getenv');
+const getenv = require('getenv');
 
-var host = getenv('HTTP_HOST'); // same as getenv.string('HTTP_HOST');
-var port = getenv.int('HTTP_PORT');
-var start = getenv.bool('HTTP_START');
+const host = getenv('HTTP_HOST'); // same as getenv.string('HTTP_HOST');
+const port = getenv.int('HTTP_PORT');
+const start = getenv.bool('HTTP_START');
 
 if (start === true) {
-  // var server = http.createServer();
+  // const server = http.createServer();
   // server.listen(port, host);
 }
 
-var abTestRatio = getenv.float('AB_TEST_RATIO');
+const abTestRatio = getenv.float('AB_TEST_RATIO');
 
 if (Math.random() < abTestRatio) {
   // test A
@@ -45,12 +47,12 @@ if (Math.random() < abTestRatio) {
   // test B
 }
 
-var keywords = getenv.array('KEYWORDS');
+const keywords = getenv.array('KEYWORDS');
 keywords.forEach(function(keyword) {
   // console.log(keyword);
 });
 
-var primes = getenv.array('PRIMES', 'int');
+const primes = getenv.array('PRIMES', 'int');
 primes.forEach(function(prime) {
   // console.log(prime, typeof prime);
 });
@@ -93,13 +95,12 @@ Split value of the environment variable at each comma and return the resulting a
 Return a list of environment variables based on a `spec`:
 
 ```javascript
-var config = getenv.multi({
-  foo: "FOO", // throws if FOO doesn't exist
-  bar: ["BAR", "defaultval"], // set a default value
-  baz: ["BAZ", "defaultval", "string"], // parse into type
-  quux: ["QUUX", undefined, "int"] // parse & throw
+const config = getenv.multi({
+  foo: 'FOO', // throws if FOO doesn't exist
+  bar: ['BAR', 'defaultval'], // set a default value
+  baz: ['BAZ', 'defaultval', 'string'], // parse into type
+  quux: ['QUUX', undefined, 'int'], // parse & throw
 });
-
 ```
 
 ### env.url(name, [fallback])
@@ -107,7 +108,7 @@ var config = getenv.multi({
 Return a parsed URL as per Node's `require("url").parse`. N.B `url` doesn't validate URLs, so be sure it includes a protocol or you'll get deeply weird results.
 
 ```javascript
-var serviceUrl = getenv.url('SERVICE_URL');
+const serviceUrl = getenv.url('SERVICE_URL');
 
 serviceUrl.port; // parsed port number
 ```
@@ -128,7 +129,7 @@ if (process.env.NODE_ENV === 'production') {
 
 ```javascript
 getenv.disableErrors();
-console.log(getenv("RANDOM"));
+console.log(getenv('RANDOM'));
 // undefined
 ```
 
@@ -138,32 +139,48 @@ Revert the effect of `disableErrors()`.
 
 ```javascript
 getenv.disableErrors();
-console.log(getenv("RANDOM"));
+console.log(getenv('RANDOM'));
 // undefined
 
 getenv.enableErrors();
-console.log(getenv("RANDOM"));
+console.log(getenv('RANDOM'));
 // Error: GetEnv.Nonexistent: RANDOM does not exist and no fallback value provided.
 ```
 
 ## Changelog
 
+### v1.0.0
+
+- Drop support for Node.js older than 6.
+- Modernize code.
+- Add MIT License in package.json and LICENSE.md.
+
+### v0.7.0
+
+- Add env.disableErrors() / getenv.enableErrors() support.
+
 ### v0.6.0
+
 - Added getenv.boolish() support.
 
 ### v0.5.0
+
 - Add getenv.url() support.
 
 ### v0.4.0
+
 - Add getenv.disableFallbacks() support.
 
 ### v0.3.0
+
 - Add getenv.multi() support.
 
 ### v0.2.0
+
 - Rename git repository
 
 ### v0.1.0
+
 - Initial release
 
 ## Authors

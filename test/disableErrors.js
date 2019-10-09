@@ -1,8 +1,8 @@
-var assert = require('assert');
+const assert = require('assert');
 
-var getenv = require('../lib/getenv');
+const getenv = require('../index');
 
-var tests = {};
+const tests = {};
 
 tests['getenv.disableErrors() should disable any errors'] = function() {
   getenv.disableErrors();
@@ -10,13 +10,13 @@ tests['getenv.disableErrors() should disable any errors'] = function() {
   assert(getenv.string('url'), undefined);
 };
 
-tests['getenv.enableErrors() should enable errors'] = function () {
+tests['getenv.enableErrors() should enable errors'] = function() {
   getenv.enableErrors();
   assert.throws(function() {
     getenv.string('url');
   });
   assert.strictEqual(getenv.string('url', 'http://localhost'), 'http://localhost');
-}
+};
 
 Object.keys(tests).forEach(function(key) {
   console.log('Test: %s', key);

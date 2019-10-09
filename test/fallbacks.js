@@ -1,8 +1,8 @@
-var assert = require('assert');
+const assert = require('assert');
 
-var getenv = require('../lib/getenv');
+const getenv = require('../index');
 
-var tests = {};
+const tests = {};
 
 // order dependent test
 tests['getenv.disableFallbacks() makes relying on fallbacks an error'] = function() {
@@ -12,7 +12,6 @@ tests['getenv.disableFallbacks() makes relying on fallbacks an error'] = functio
   });
   getenv.enableFallbacks();
 };
-
 
 Object.keys(tests).forEach(function(key) {
   console.log('Test: %s', key);
