@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var getenv = require('../lib/getenv');
+var getenv = require('../index');
 
 // Setting env vars for testing
 process.env.TEST_GETENV_EMPTY_STRING = '';

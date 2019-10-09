@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var getenv = require('../lib/getenv');
+var getenv = require('../index');
 
 var tests = {};
 
