@@ -96,12 +96,11 @@ Return a list of environment variables based on a `spec`:
 
 ```javascript
 var config = getenv.multi({
-  foo: "FOO", // throws if FOO doesn't exist
-  bar: ["BAR", "defaultval"], // set a default value
-  baz: ["BAZ", "defaultval", "string"], // parse into type
-  quux: ["QUUX", undefined, "int"] // parse & throw
+  foo: 'FOO', // throws if FOO doesn't exist
+  bar: ['BAR', 'defaultval'], // set a default value
+  baz: ['BAZ', 'defaultval', 'string'], // parse into type
+  quux: ['QUUX', undefined, 'int'], // parse & throw
 });
-
 ```
 
 ### env.url(name, [fallback])
@@ -130,7 +129,7 @@ if (process.env.NODE_ENV === 'production') {
 
 ```javascript
 getenv.disableErrors();
-console.log(getenv("RANDOM"));
+console.log(getenv('RANDOM'));
 // undefined
 ```
 
@@ -140,32 +139,38 @@ Revert the effect of `disableErrors()`.
 
 ```javascript
 getenv.disableErrors();
-console.log(getenv("RANDOM"));
+console.log(getenv('RANDOM'));
 // undefined
 
 getenv.enableErrors();
-console.log(getenv("RANDOM"));
+console.log(getenv('RANDOM'));
 // Error: GetEnv.Nonexistent: RANDOM does not exist and no fallback value provided.
 ```
 
 ## Changelog
 
 ### v0.6.0
+
 - Added getenv.boolish() support.
 
 ### v0.5.0
+
 - Add getenv.url() support.
 
 ### v0.4.0
+
 - Add getenv.disableFallbacks() support.
 
 ### v0.3.0
+
 - Add getenv.multi() support.
 
 ### v0.2.0
+
 - Rename git repository
 
 ### v0.1.0
+
 - Initial release
 
 ## Authors

@@ -17,13 +17,16 @@
   },
   "main": "index.js",
   "scripts": {
+    "prettier": "prettier --write *.{js,md} **/*.js",
     "test": "make test"
   },
   "engines": {
     "node": ">=6"
   },
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  },
   "keywords": [
     "env",
     "environment",

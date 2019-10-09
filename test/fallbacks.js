@@ -13,7 +13,6 @@ tests['getenv.disableFallbacks() makes relying on fallbacks an error'] = functio
   getenv.enableFallbacks();
 };
 
-
 Object.keys(tests).forEach(function(key) {
   console.log('Test: %s', key);
   tests[key]();

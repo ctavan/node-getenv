@@ -1,5 +1,5 @@
-var util = require("util");
-var url = require("url");
+var util = require('util');
+var url = require('url');
 
 var fallbacksDisabled = false;
 var throwError = true;
@@ -11,12 +11,17 @@ function _value(varName, fallback) {
       return value;
     }
     if (fallback === undefined) {
-      throw new Error('GetEnv.Nonexistent: ' + varName + ' does not exist ' +
-                      'and no fallback value provided.');
+      throw new Error(
+        'GetEnv.Nonexistent: ' + varName + ' does not exist ' + 'and no fallback value provided.'
+      );
     }
     if (fallbacksDisabled) {
-      throw new Error('GetEnv.DisabledFallbacks: ' + varName + ' relying on fallback ' +
-                      'when fallbacks have been disabled');
+      throw new Error(
+        'GetEnv.DisabledFallbacks: ' +
+          varName +
+          ' relying on fallback ' +
+          'when fallbacks have been disabled'
+      );
     }
     return '' + fallback;
   }
@@ -36,7 +41,7 @@ var convert = {
     return +value;
   },
   float: function(value) {
-    var isInfinity = (+value === Infinity || +value === -Infinity);
+    var isInfinity = +value === Infinity || +value === -Infinity;
     if (isInfinity) {
       throw new Error('GetEnv.Infinity: ' + value + ' is set to +/-Infinity.');
     }
@@ -49,39 +54,40 @@ var convert = {
     return +value;
   },
   bool: function(value) {
-    var isBool = (value === 'true' || value === 'false');
+    var isBool = value === 'true' || value === 'false';
     if (!isBool) {
       throw new Error('GetEnv.NoBoolean: ' + value + ' is not a boolean.');
     }
 
-    return (value === 'true')
+    return value === 'true';
   },
   boolish: function(value) {
     try {
-      return convert.bool(value)
-    }
-    catch(err) {
-      var isBool = (value === '1' || value === '0');
+      return convert.bool(value);
+    } catch (err) {
+      var isBool = value === '1' || value === '0';
       if (!isBool) {
         throw new Error('GetEnv.NoBoolean: ' + value + ' is not a boolean.');
       }
 
-      return (value === '1');
+      return value === '1';
     }
   },
-  url: url.parse
+  url: url.parse,
 };
 
 function converter(type) {
   return function(varName, fallback) {
-    if(typeof varName == 'string') { // default
+    if (typeof varName == 'string') {
+      // default
       var value = _value(varName, fallback);
       return convert[type](value);
-    } else { // multibert!
+    } else {
+      // multibert!
       return getenv.multi(varName);
     }
   };
-};
+}
 
 var getenv = converter('string');
 
@@ -101,22 +107,25 @@ getenv.array = function array(varName, type, fallback) {
 getenv.multi = function multi(spec) {
   var key, value;
   var result = {};
-  for(var key in spec) {
+  for (var key in spec) {
     var value = spec[key];
-    if(util.isArray(value)) { // default value & typecast
-      switch(value.length) {
+    if (util.isArray(value)) {
+      // default value & typecast
+      switch (value.length) {
         case 1: // no default value
         case 2: // no type casting
           result[key] = getenv(value[0], value[1]); // dirty, when case 1: value[1] is undefined
-        break;
+          break;
         case 3: // with typecast
           result[key] = getenv[value[2]](value[0], value[1]);
           break;
-        default: // wtf?
-          throw('getenv.multi(): invalid spec');
+        default:
+          // wtf?
+          throw 'getenv.multi(): invalid spec';
           break;
       }
-    } else { // value or throw
+    } else {
+      // value or throw
       result[key] = getenv(value);
     }
   }
