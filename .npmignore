@@ -1,0 +1,5 @@
+node_modules/
+*.log
+test/
+prettier.config.js
+.travis.yml
