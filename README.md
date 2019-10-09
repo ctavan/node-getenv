@@ -149,6 +149,10 @@ console.log(getenv('RANDOM'));
 
 ## Changelog
 
+### v0.7.0
+
+- Add env.disableErrors() / getenv.enableErrors() support.
+
 ### v0.6.0
 
 - Added getenv.boolish() support.
