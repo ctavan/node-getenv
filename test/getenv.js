@@ -16,21 +16,27 @@ process.env.TEST_GETENV_FALSE = 'false';
 process.env.TEST_GETENV_TRUE = 'true';
 process.env.TEST_GETENV_NOT_REALLY_TRUE = '1';
 process.env.TEST_GETENV_NOT_REALLY_FALSE = '0';
+process.env.TEST_GETENV_NOT_REALLY_TRUE2 = 'y';
+process.env.TEST_GETENV_NOT_REALLY_FALSE2 = 'n';
 process.env.TEST_GETENV_WRONG_NUMBER_INPUT = '3 test';
 process.env.TEST_GETENV_STRING_ARRAY1 = 'one';
 process.env.TEST_GETENV_STRING_ARRAY2 = 'one, two ,three , four';
 process.env.TEST_GETENV_STRING_ARRAY3 = 'one, two,';
 process.env.TEST_GETENV_STRING_ARRAY4 = ' ';
 process.env.TEST_GETENV_STRING_ARRAY5 = 'one;two:three,four';
+process.env.TEST_GETENV_STRING_ARRAY6 = 'one two ';
 process.env.TEST_GETENV_INT_ARRAY = '1,2, 3';
+process.env.TEST_GETENV_INT_ARRAY2 = '1  2 3';
 process.env.TEST_GETENV_INT_ARRAY_INVALID1 = '1, 2.2, 3';
 process.env.TEST_GETENV_INT_ARRAY_INVALID2 = '1, true, 3';
 process.env.TEST_GETENV_INT_ARRAY_INVALID3 = '1, abc, 3';
 process.env.TEST_GETENV_FLOAT_ARRAY = '1.9,2, 3e5';
+process.env.TEST_GETENV_FLOAT_ARRAY2 = '1.9 2  3e5';
 process.env.TEST_GETENV_FLOAT_ARRAY_INVALID1 = '1.9,true, 3e5';
 process.env.TEST_GETENV_FLOAT_ARRAY_INVALID2 = '1.9, abc, 3e5';
 process.env.TEST_GETENV_FLOAT_ARRAY_INVALID3 = '1.9, Infinity, 3e5';
 process.env.TEST_GETENV_BOOL_ARRAY = 'true, false, true';
+process.env.TEST_GETENV_BOOL_ARRAY2 = 'true n 1';
 process.env.TEST_GETENV_BOOL_ARRAY_INVALID1 = 'true, 1, true';
 process.env.TEST_GETENV_BOOL_ARRAY_INVALID2 = 'true, 1.2, true';
 process.env.TEST_GETENV_BOOL_ARRAY_INVALID3 = 'true, abc, true';
@@ -243,6 +249,14 @@ tests['getenv.boolish() valid input'] = function() {
       varName: 'TEST_GETENV_NOT_REALLY_TRUE',
       expected: true,
     },
+    {
+      varName: 'TEST_GETENV_NOT_REALLY_FALSE2',
+      expected: false,
+    },
+    {
+      varName: 'TEST_GETENV_NOT_REALLY_TRUE2',
+      expected: true,
+    },
   ];
 
   data.forEach(function(item) {
@@ -303,7 +317,37 @@ tests['getenv.array() valid string (default) input'] = function() {
 
   data.forEach(function(item) {
     const arrayVar = getenv.array(item.varName);
-    assert.deepEqual(arrayVar, item.expected);
+    assert.deepStrictEqual(arrayVar, item.expected);
+  });
+};
+
+tests['getenv.array() valid inputs split by separator'] = function() {
+  const data = [
+    {
+      varName: 'TEST_GETENV_STRING_ARRAY6',
+      type: 'string',
+      expected: ['one', 'two', ''],
+    },
+    {
+      varName: 'TEST_GETENV_INT_ARRAY2',
+      type: 'int',
+      expected: [1, 2, 3],
+    },
+    {
+      varName: 'TEST_GETENV_FLOAT_ARRAY2',
+      type: 'float',
+      expected: [1.9, 2, 3e5],
+    },
+    {
+      varName: 'TEST_GETENV_BOOL_ARRAY2',
+      type: 'boolish',
+      expected: [true, false, true],
+    },
+  ];
+
+  data.forEach(function(item) {
+    const arrayVar = getenv.array(item.varName, item.type, [], /\s+/);
+    assert.deepStrictEqual(arrayVar, item.expected);
   });
 };
 
@@ -411,7 +455,7 @@ tests['getenv.array() nonexistent variable'] = function() {
 tests['getenv.array() nonexistent variable with fallback'] = function() {
   const expect = ['A', 'B', 'C'];
   const arrayVar = getenv.array('TEST_GETENV_NONEXISTENT', 'string', expect);
-  assert.deepEqual(arrayVar, expect);
+  assert.deepStrictEqual(arrayVar, expect);
 };
 
 tests['getenv.array() nonexistent type'] = function() {
@@ -428,7 +472,7 @@ tests['getenv.multi([string]) multiple env vars'] = function() {
   const expect = {
     foo: process.env.TEST_GETENV_STRING,
   };
-  assert.deepEqual(expect, config);
+  assert.deepStrictEqual(expect, config);
 };
 
 tests['getenv([string]) multiple env vars shortcut'] = function() {
@@ -439,7 +483,7 @@ tests['getenv([string]) multiple env vars shortcut'] = function() {
   const expect = {
     foo: process.env.TEST_GETENV_STRING,
   };
-  assert.deepEqual(expect, config);
+  assert.deepStrictEqual(expect, config);
 };
 
 tests['getenv.multi([string/throw]) multiple env vars'] = function() {
@@ -459,7 +503,7 @@ tests['getenv.multi([string/typecast]) multiple env vars'] = function() {
   const expect = {
     foo: process.env.TEST_GETENV_STRING,
   };
-  assert.deepEqual(expect, config);
+  assert.deepStrictEqual(expect, config);
 };
 
 tests['getenv.multi([string/typecast/defaultval]) multiple env vars'] = function() {
@@ -470,7 +514,7 @@ tests['getenv.multi([string/typecast/defaultval]) multiple env vars'] = function
   const expect = {
     foo: 'default',
   };
-  assert.deepEqual(expect, config);
+  assert.deepStrictEqual(expect, config);
 };
 
 tests['getenv.multi([string/typecast/throw]) multiple env vars'] = function() {
@@ -490,7 +534,7 @@ tests['getenv.multi([string/defaultval]) multiple env vars'] = function() {
   const expect = {
     foo: process.env.TEST_GETENV_STRING,
   };
-  assert.deepEqual(expect, config);
+  assert.deepStrictEqual(expect, config);
 };
 
 tests['getenv.multi([string/defaultval/throw]) multiple env vars'] = function() {
@@ -501,7 +545,7 @@ tests['getenv.multi([string/defaultval/throw]) multiple env vars'] = function() 
   const expect = {
     foo: 'default',
   };
-  assert.deepEqual(expect, config);
+  assert.deepStrictEqual(expect, config);
 };
 
 tests['getenv.multi([string/single]) multiple env vars'] = function() {
@@ -512,7 +556,7 @@ tests['getenv.multi([string/single]) multiple env vars'] = function() {
   const expect = {
     foo: process.env.TEST_GETENV_STRING,
   };
-  assert.deepEqual(expect, config);
+  assert.deepStrictEqual(expect, config);
 };
 
 tests['getenv.multi([string/single/throw]) multiple env vars'] = function() {
@@ -539,7 +583,7 @@ tests['getenv.url() valid input'] = function() {
       h[key] = parsed[key];
       return h;
     }, {});
-    assert.deepEqual(actual, expectation);
+    assert.deepStrictEqual(actual, expectation);
   });
 };
 

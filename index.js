@@ -65,12 +65,15 @@ const convert = {
     try {
       return convert.bool(value);
     } catch (err) {
-      const isBool = value === '1' || value === '0';
+      const upperCaseValue = value.toUpperCase();
+      const isBool = value === '1' || value === '0' || upperCaseValue === 'Y' || upperCaseValue === 'N';
       if (!isBool) {
         throw new Error('GetEnv.NoBoolean: ' + value + ' is not a boolean.');
       }
-
-      return value === '1';
+      if (value === '1' || upperCaseValue === 'Y') {
+        return true;
+      };
+      return false;
     }
   },
   url: url.parse,
@@ -95,20 +98,22 @@ Object.keys(convert).forEach(function(type) {
   getenv[type] = converter(type);
 });
 
-getenv.array = function array(varName, type, fallback) {
+
+getenv.array = function array(varName, type, fallback, separator) {
   type = type || 'string';
+  separator = separator || /\s*,\s*/;
   if (Object.keys(convert).indexOf(type) === -1) {
     throw new Error('GetEnv.ArrayUndefinedType: Unknown array type ' + type);
   }
   const value = _value(varName, fallback);
-  return value.split(/\s*,\s*/).map(convert[type]);
+  return value.split(separator).map(convert[type]);
 };
 
 getenv.multi = function multi(spec) {
   const result = {};
   for (let key in spec) {
     const value = spec[key];
-    if (util.isArray(value)) {
+    if (Array.isArray(value)) {
       // default value & typecast
       switch (value.length) {
         case 1: // no default value
