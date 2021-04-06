@@ -95,20 +95,21 @@ Object.keys(convert).forEach(function(type) {
   getenv[type] = converter(type);
 });
 
-getenv.array = function array(varName, type, fallback) {
+getenv.array = function array(varName, type, fallback, separator) {
   type = type || 'string';
+  separator = separator || /\s*,\s*/;
   if (Object.keys(convert).indexOf(type) === -1) {
     throw new Error('GetEnv.ArrayUndefinedType: Unknown array type ' + type);
   }
   const value = _value(varName, fallback);
-  return value.split(/\s*,\s*/).map(convert[type]);
+  return value.split(separator).map(convert[type]);
 };
 
 getenv.multi = function multi(spec) {
   const result = {};
   for (let key in spec) {
     const value = spec[key];
-    if (util.isArray(value)) {
+    if (Array.isArray(value)) {
       // default value & typecast
       switch (value.length) {
         case 1: // no default value
