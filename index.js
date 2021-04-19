@@ -1,4 +1,3 @@
-const util = require('util');
 const url = require('url');
 
 let fallbacksDisabled = false;
