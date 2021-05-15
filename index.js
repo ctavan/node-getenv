@@ -28,10 +28,10 @@ function _value(varName, fallback) {
 }
 
 const convert = {
-  string: function(value) {
+  string: function (value) {
     return '' + value;
   },
-  int: function(value) {
+  int: function (value) {
     const isInt = value.match(/^-?\d+$/);
     if (!isInt) {
       throw new Error('GetEnv.NoInteger: ' + value + ' is not an integer.');
@@ -39,7 +39,7 @@ const convert = {
 
     return +value;
   },
-  float: function(value) {
+  float: function (value) {
     const isInfinity = +value === Infinity || +value === -Infinity;
     if (isInfinity) {
       throw new Error('GetEnv.Infinity: ' + value + ' is set to +/-Infinity.');
@@ -52,15 +52,16 @@ const convert = {
 
     return +value;
   },
-  bool: function(value) {
-    const isBool = (value || '').toLowerCase() === 'true' || (value || '').toLowerCase() === 'false';
+  bool: function (value) {
+    const isBool =
+      (value || '').toLowerCase() === 'true' || (value || '').toLowerCase() === 'false';
     if (!isBool) {
       throw new Error('GetEnv.NoBoolean: ' + value + ' is not a boolean.');
     }
 
     return (value || '').toLowerCase() === 'true';
   },
-  boolish: function(value) {
+  boolish: function (value) {
     try {
       return convert.bool(value);
     } catch (err) {
@@ -76,7 +77,7 @@ const convert = {
 };
 
 function converter(type) {
-  return function(varName, fallback) {
+  return function (varName, fallback) {
     if (typeof varName == 'string') {
       // default
       const value = _value(varName, fallback);
@@ -90,7 +91,7 @@ function converter(type) {
 
 const getenv = converter('string');
 
-Object.keys(convert).forEach(function(type) {
+Object.keys(convert).forEach(function (type) {
   getenv[type] = converter(type);
 });
 
@@ -131,19 +132,19 @@ getenv.multi = function multi(spec) {
   return result;
 };
 
-getenv.disableFallbacks = function() {
+getenv.disableFallbacks = function () {
   fallbacksDisabled = true;
 };
 
-getenv.enableFallbacks = function() {
+getenv.enableFallbacks = function () {
   fallbacksDisabled = false;
 };
 
-getenv.disableErrors = function() {
+getenv.disableErrors = function () {
   throwError = false;
 };
 
-getenv.enableErrors = function() {
+getenv.enableErrors = function () {
   throwError = true;
 };
 
