@@ -149,6 +149,10 @@ console.log(getenv('RANDOM'));
 
 ## Changelog
 
+### v1.1.0
+
+- Add separator option to `env.array()` (#19)
+
 ### v1.0.0
 
 - Drop support for Node.js older than 6.
