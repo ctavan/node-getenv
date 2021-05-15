@@ -86,9 +86,9 @@ Return as boolean. Only allows true/false as valid values.
 
 Return as boolean. Allows true/false/1/0 as valid values.
 
-### env.array(name, [type], [fallback])
+### env.array(name, [type], [fallback], [separator])
 
-Split value of the environment variable at each comma and return the resulting array where each value has been typecast according to the `type` parameter. An array can be provided as `fallback`.
+Split value of the environment variable at each comma (default) and return the resulting array where each value has been typecast according to the `type` parameter. An array can be provided as `fallback` and a regular expression can be provided as `separator` in case commas don't fit.
 
 ### env.multi({spec})
 
