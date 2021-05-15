@@ -48,12 +48,12 @@ if (Math.random() < abTestRatio) {
 }
 
 const keywords = getenv.array('KEYWORDS');
-keywords.forEach(function(keyword) {
+keywords.forEach(function (keyword) {
   // console.log(keyword);
 });
 
 const primes = getenv.array('PRIMES', 'int');
-primes.forEach(function(prime) {
+primes.forEach(function (prime) {
   // console.log(prime, typeof prime);
 });
 ```
@@ -148,6 +148,10 @@ console.log(getenv('RANDOM'));
 ```
 
 ## Changelog
+
+### v1.1.0
+
+- Add separator option to `env.array()` (#19)
 
 ### v1.0.0
 
