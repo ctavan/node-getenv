@@ -48,12 +48,12 @@ if (Math.random() < abTestRatio) {
 }
 
 const keywords = getenv.array('KEYWORDS');
-keywords.forEach(function(keyword) {
+keywords.forEach(function (keyword) {
   // console.log(keyword);
 });
 
 const primes = getenv.array('PRIMES', 'int');
-primes.forEach(function(prime) {
+primes.forEach(function (prime) {
   // console.log(prime, typeof prime);
 });
 ```
