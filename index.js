@@ -53,12 +53,12 @@ const convert = {
     return +value;
   },
   bool: function(value) {
-    const isBool = value === 'true' || value === 'false' || value === 'TRUE' || value === 'FALSE';
+    const isBool = (value || '').toLowerCase() === 'true' || (value || '').toLowerCase() === 'false';
     if (!isBool) {
       throw new Error('GetEnv.NoBoolean: ' + value + ' is not a boolean.');
     }
 
-    return value === 'true' || value === 'TRUE';
+    return (value || '').toLowerCase() === 'true';
   },
   boolish: function(value) {
     try {
