@@ -149,6 +149,10 @@ console.log(getenv('RANDOM'));
 
 ## Changelog
 
+### v2.0.0
+
+- Allow any case for True/False boolean strings `env.bool()` (#22)
+
 ### v1.1.0
 
 - Add separator option to `env.array()` (#19)
