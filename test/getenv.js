@@ -13,7 +13,9 @@ process.env.TEST_GETENV_FLOAT2 = '0.0';
 process.env.TEST_GETENV_INFINITY1 = Infinity;
 process.env.TEST_GETENV_INFINITY2 = -Infinity;
 process.env.TEST_GETENV_FALSE = 'false';
+process.env.TEST_GETENV_FALSE2 = 'FALSE';
 process.env.TEST_GETENV_TRUE = 'true';
+process.env.TEST_GETENV_TRUE2 = 'TRUE';
 process.env.TEST_GETENV_NOT_REALLY_TRUE = '1';
 process.env.TEST_GETENV_NOT_REALLY_FALSE = '0';
 process.env.TEST_GETENV_WRONG_NUMBER_INPUT = '3 test';
@@ -203,7 +205,15 @@ tests['getenv.bool() valid input'] = function() {
       expected: false,
     },
     {
+      varName: 'TEST_GETENV_FALSE2',
+      expected: false,
+    },
+    {
       varName: 'TEST_GETENV_TRUE',
+      expected: true,
+    },
+    {
+      varName: 'TEST_GETENV_TRUE2',
       expected: true,
     },
   ];
