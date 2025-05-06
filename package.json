@@ -18,15 +18,16 @@
   },
   "main": "index.js",
   "scripts": {
-    "prettier": "prettier --write *.{js,md} **/*.js",
-    "test": "bash -ec 'for F in test/*.js; do echo \"$F\": ; node $F; done;'"
+    "prettier": "prettier --check .",
+    "unit": "bash -ec 'for F in test/*.js; do echo \"$F\": ; node $F; done;'",
+    "test": "npm run prettier && npm run unit"
   },
   "engines": {
     "node": ">=6"
   },
   "dependencies": {},
   "devDependencies": {
-    "prettier": "^1.18.2"
+    "prettier": "^3.5.3"
   },
   "keywords": [
     "env",
